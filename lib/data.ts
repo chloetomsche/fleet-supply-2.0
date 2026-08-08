@@ -35,37 +35,30 @@ export type FetchProductsParams = {
   on_sale?: boolean;
 };
 
-export async function fetchProducts({
-  query,
-  season,
-  brand,
-  category,
-  on_sale,
-}: FetchProductsParams) {
+export async function fetchProducts({ query }: FetchProductsParams) {
   const searchQuery = query ?? null;
-  const searchSeason = season ?? null;
-  const searchBrand = brand ?? null;
-  const searchCategory = category ?? null;
-  const searchOnSale = on_sale ?? null;
 
+    const searchPattern = `%${searchQuery}%`
   try {
-    const searchPattern = query ? `%${query}%` : "%";
-    const products = await sql`
+    if (searchQuery) {
+      console.log("im in the search branch");
+      const products = await sql`
+    
         SELECT * FROM products
         WHERE 
-        (${searchQuery} IS NULL 
-        OR name ILIKE ${searchPattern} 
-        OR array_to_string(tags, ' ') ILIKE ${searchPattern}) 
-
-        AND (${searchSeason} IS NULL OR season = ${searchSeason})
-        AND (${searchBrand} IS NULL OR brand = ${searchBrand})
-        AND (${searchCategory} IS NULL OR category = ${searchCategory})
-        AND  (${searchOnSale} IS NULL OR ${searchOnSale} IS FALSE OR on_sale = true)
+        name ILIKE ${searchPattern} 
+        OR array_to_string(tags, ' ') ILIKE ${searchPattern}
         `;
+      return products;
+    } else {
+      console.log("im in the no-search branch");
+      const products = await sql`SELECT * FROM products`;
 
-    return products;
+      return products;
+    }
   } catch (error) {
-    throw new Error("No products matches your search");
+    console.log(error);
+    throw error;
   }
 }
 

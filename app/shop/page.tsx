@@ -11,10 +11,17 @@ export default async function ShopAll({
     on_sale?: string;
   }>;
 }) {
-  const { query, season, brand, category, on_sale } = await searchParams;
+  console.log("shop page rendered");
+  const { query } = await searchParams;
+
+  const products = await fetchProducts({
+    query,
+  });
+  console.log(products);
+
   return (
     <div>
-      <ProductGrid />
+      <ProductGrid products={products} />
     </div>
   );
 }
