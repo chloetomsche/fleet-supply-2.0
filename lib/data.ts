@@ -4,7 +4,8 @@ const sql = postgres(process.env.POSTGRES_URL!, {
   ssl: "require",
 });
 
-export async function fetchSearchedProducts(query: string) {
+//Fetches products for the search drop down
+export async function fetchRecommendedProducts(query: string) {
   try {
     const searchPattern = `%${query}%`;
 
@@ -26,21 +27,11 @@ export async function fetchSearchedProducts(query: string) {
     throw new Error("Cannot find product.");
   }
 }
-
-export type FetchProductsParams = {
-  query?: string;
-  category?: string;
-  season?: string;
-  brand?: string;
-  on_sale?: boolean;
-};
-
-export async function fetchProducts({ query }: FetchProductsParams) {
-  const searchQuery = query ?? null;
-
-    const searchPattern = `%${searchQuery}%`
+//Fetches products for shop page
+export async function fetchProductsBySearch(query?: string) {
   try {
-    if (searchQuery) {
+    if (query) {
+      const searchPattern = `%${query}%`;
       console.log("im in the search branch");
       const products = await sql`
     
@@ -62,9 +53,33 @@ export async function fetchProducts({ query }: FetchProductsParams) {
   }
 }
 
+//Fetches a single product for the product page
 export async function fetchProductBySlug(slug: string) {
   const product = await sql`
         SELECT * FROM products WHERE slug = ${slug}
     `;
   return product[0];
+}
+
+//Fetches products for the sales display
+export async function fetchProductsByDisplay(category?: string) {
+  try {
+    if (!category) {
+      const products = await sql`
+            SELECT * FROM products WHERE on_sale = true
+            `;
+
+      return products;
+    } else {
+      const products = await sql`
+        SELECT * FROM products WHERE on_sale = true 
+        AND category = ${category}
+        `;
+
+      return products;
+    }
+  } catch (error) {
+    console.log(error);
+    throw new Error("Failed to fetch products");
+  }
 }

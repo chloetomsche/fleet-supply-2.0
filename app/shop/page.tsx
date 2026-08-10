@@ -1,4 +1,4 @@
-import { fetchProducts } from "@/lib/data";
+import { fetchProductsBySearch } from "@/lib/data";
 import ProductGrid from "@/components/ProductGrid";
 export default async function ShopAll({
   searchParams,
@@ -14,9 +14,7 @@ export default async function ShopAll({
   console.log("shop page rendered");
   const { query } = await searchParams;
 
-  const products = await fetchProducts({
-    query,
-  });
+  const products = await fetchProductsBySearch(query);
   console.log(products);
 
   return (

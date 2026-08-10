@@ -1,18 +1,23 @@
 "use server";
 
-import { fetchSearchedProducts } from "./data";
-import { fetchProducts } from "./data";
-import { FetchProductsParams } from "./data";
-import { fetchProductBySlug } from "./data";
+import { fetchRecommendedProducts } from "./data";
+import { fetchProductsBySearch } from "./data";
+import { fetchProductsByDisplay } from "./data";
 
 export async function searchRecommendedProducts(query: string) {
-  const results = await fetchSearchedProducts(query);
+  const results = await fetchRecommendedProducts(query);
 
   return results;
 }
 
-export async function searchProducts({query} : FetchProductsParams){
-    const results = await fetchProducts({query})
+export async function searchProducts(query: string){
+    const results = await fetchProductsBySearch(query)
 
     return results
+}
+
+export async function salesProducts(category: string) {
+    const results = await fetchProductsByDisplay(category)
+
+    return results;
 }
