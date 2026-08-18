@@ -30,7 +30,6 @@ async function seedProducts() {
 }
 
 export async function GET() {
-  console.log(JSON.stringify(products[0], null, 2));
   try {
     await seedProducts();
     return Response.json({ message: "Database seeded successfully" });

@@ -83,3 +83,22 @@ export async function fetchProductsByDisplay(category?: string) {
     throw new Error("Failed to fetch products");
   }
 }
+
+//Fetches product categories
+export async function fetchProductsByCategory(category?: string) {
+  try {
+    if (!category) {
+      const products = await sql`
+            SELECT * FROM products
+            `;
+      return products;
+    } else {
+      const products = await sql`
+            SELECT * FROM products WHERE category = ${category}
+            `;
+      return products;
+    }
+  } catch (error) {
+    throw new Error("Failed to categorize products");
+  }
+}

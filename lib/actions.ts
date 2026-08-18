@@ -3,6 +3,7 @@
 import { fetchRecommendedProducts } from "./data";
 import { fetchProductsBySearch } from "./data";
 import { fetchProductsByDisplay } from "./data";
+import { fetchProductsByCategory } from "./data";
 
 export async function searchRecommendedProducts(query: string) {
   const results = await fetchRecommendedProducts(query);
@@ -18,6 +19,12 @@ export async function searchProducts(query: string){
 
 export async function salesProducts(category: string) {
     const results = await fetchProductsByDisplay(category)
+
+    return results;
+}
+
+export async function productsByCategory(category:string) {
+    const results = await fetchProductsByCategory(category);
 
     return results;
 }
