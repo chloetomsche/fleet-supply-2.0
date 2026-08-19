@@ -1,11 +1,12 @@
-import Image from "next/image";
 import SalesDisplay from "@/components/SalesDisplay";
 import CategoryGrid from "@/components/CategoryGrid";
-
+import BrandPromotions
+ from "@/components/BrandPromotions";
 export default function Home() {
   return (
-    <div>
+    <div className="">
       <SalesDisplay />
+      <BrandPromotions />
       <CategoryGrid />
     </div>
   );

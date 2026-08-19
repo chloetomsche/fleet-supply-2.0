@@ -17,3 +17,14 @@ body {
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.tilt-warp-heading {
+  /* Connect to the Next.js font variable */
+  font-family: var(--font-tilt-warp), sans-serif; 
+  font-optical-sizing: auto;
+  font-weight: 800;
+  font-style: normal;
+  font-variation-settings:
+    "XROT" 0,
+    "YROT" 0;
+}

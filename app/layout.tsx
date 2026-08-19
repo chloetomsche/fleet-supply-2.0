@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Tilt_Warp } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -13,6 +13,11 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+const tiltWrap = Tilt_Warp({
+  variable:"--font--tilt-warp",
+  subsets: ["latin"]
+})
 
 export const metadata: Metadata = {
   title: "Fleet Supply",
