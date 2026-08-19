@@ -1,5 +1,5 @@
 "use client";
-import { productsByCategory } from "@/lib/actions";
+import { productsByFilter } from "@/lib/actions";
 import { products } from "@/constants/productsData";
 import { useState, useEffect } from "react";
 import CategoryCard from "./CategoryCard";
@@ -12,7 +12,7 @@ export default function CategoryGrid() {
 
   useEffect(() => {
     const fetchProducts = async () => {
-      const results = await productsByCategory(category);
+      const results = await productsByFilter(category);
 
       return results;
     };

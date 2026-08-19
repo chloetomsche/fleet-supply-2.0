@@ -1,5 +1,6 @@
-import { fetchProductsBySearch } from "@/lib/data";
+import { fetchProductsByFilter } from "@/lib/data";
 import ProductGrid from "@/components/ProductGrid";
+import ShopFilter from "@/components/ShopFilter";
 export default async function ShopAll({
   searchParams,
 }: {
@@ -11,14 +12,22 @@ export default async function ShopAll({
     on_sale?: string;
   }>;
 }) {
-  console.log("shop page rendered");
-  const { query } = await searchParams;
+  const { query, season, brand, category, on_sale } = await searchParams;
+  console.log("searchParams:", { query, season, brand, category, on_sale })
+  const onSale = on_sale === "true" ? true : undefined;
 
-  const products = await fetchProductsBySearch(query);
-  console.log(products);
+  const products = await fetchProductsByFilter({
+    query,
+    season,
+    brand,
+    category,
+    on_sale: onSale,
+  });
 
+  console.log("products being passed to grid:", products.length)
   return (
-    <div>
+    <div className="flex justify-center gap-15 mt-20">
+      <ShopFilter />
       <ProductGrid products={products} />
     </div>
   );

@@ -27,31 +27,6 @@ export async function fetchRecommendedProducts(query: string) {
     throw new Error("Cannot find product.");
   }
 }
-//Fetches products for shop page
-export async function fetchProductsBySearch(query?: string) {
-  try {
-    if (query) {
-      const searchPattern = `%${query}%`;
-      console.log("im in the search branch");
-      const products = await sql`
-    
-        SELECT * FROM products
-        WHERE 
-        name ILIKE ${searchPattern} 
-        OR array_to_string(tags, ' ') ILIKE ${searchPattern}
-        `;
-      return products;
-    } else {
-      console.log("im in the no-search branch");
-      const products = await sql`SELECT * FROM products`;
-
-      return products;
-    }
-  } catch (error) {
-    console.log(error);
-    throw error;
-  }
-}
 
 //Fetches a single product for the product page
 export async function fetchProductBySlug(slug: string) {
@@ -84,21 +59,54 @@ export async function fetchProductsByDisplay(category?: string) {
   }
 }
 
-//Fetches product categories
-export async function fetchProductsByCategory(category?: string) {
+//Filters shop's products
+
+export type FilterParamsTypes = {
+  query?: string;
+  category?: string;
+  season?: string;
+  brand?: string;
+  on_sale?: boolean;
+};
+export async function fetchProductsByFilter({
+  query,
+  category,
+  season,
+  brand,
+  on_sale,
+}: FilterParamsTypes) {
+  const checkedQuery = query ?? null;
+  const checkedCategory = category ?? null;
+  const checkedSeason = season ?? null;
+  const checkedBrand = brand ?? null;
+  const checkedSale = on_sale ?? false;
+
+  console.log("filter params:", { checkedQuery, checkedCategory, checkedSeason, checkedBrand, checkedSale })
   try {
-    if (!category) {
+    const searchPattern = checkedQuery ? `%${checkedQuery}%` : "%";
+
+    if (checkedSale !== true) {
       const products = await sql`
-            SELECT * FROM products
-            `;
+        SELECT * FROM products 
+        WHERE (name ILIKE ${searchPattern} 
+        OR array_to_string(tags, ' ') ILIKE ${searchPattern} )
+        AND (${checkedCategory}::text IS NULL OR category = ${checkedCategory})
+        AND (${checkedSeason}::text IS NULL OR season = ${checkedSeason})
+        AND (${checkedBrand}::text IS NULL OR brand = ${checkedBrand})
+    
+        `;
+
       return products;
     } else {
       const products = await sql`
-            SELECT * FROM products WHERE category = ${category}
-            `;
+        SELECT * FROM products WHERE on_sale = true
+        `;
+
+        console.log("sale products returned:", products.length)
       return products;
     }
   } catch (error) {
-    throw new Error("Failed to categorize products");
+    console.log(error);
+    throw new Error("Failed to fetch products");
   }
 }
