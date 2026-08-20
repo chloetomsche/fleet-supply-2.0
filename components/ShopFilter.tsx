@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState} from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 
 export default function ShopFilter() {
@@ -48,6 +48,7 @@ export default function ShopFilter() {
     "Hampton Bay",
     "Frigidaire",
   ];
+
 
   return (
     <div className="w-48">
