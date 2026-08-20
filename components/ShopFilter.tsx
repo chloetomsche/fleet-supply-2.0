@@ -1,5 +1,5 @@
 "use client";
-import { useState} from "react";
+import { useState, useEffect } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 
 export default function ShopFilter() {
@@ -22,6 +22,30 @@ export default function ShopFilter() {
   function clearFilters() {
     router.push(pathname);
   }
+
+  useEffect(() => {
+    const existingCategoryParam = searchParams.get("category");
+    const existingSeasonParam = searchParams.get("season");
+    const existingBrandParam = searchParams.get("brand");
+
+    if (existingCategoryParam) {
+      setFilter("category");
+      setIsSecondFilter(true);
+      setSecondFilter(existingCategoryParam);
+    } else if (existingSeasonParam) {
+      setFilter("season");
+      setIsSecondFilter(true);
+      setSecondFilter(existingSeasonParam);
+    } else if (existingBrandParam) {
+      setFilter("brand");
+      setIsSecondFilter(true);
+      setSecondFilter(existingBrandParam);
+    } else {
+      setFilter("");
+      setIsSecondFilter(false);
+      setSecondFilter("");
+    }
+  }, [searchParams]);
 
   const categories = [
     "Power Tools",
@@ -48,7 +72,6 @@ export default function ShopFilter() {
     "Hampton Bay",
     "Frigidaire",
   ];
-
 
   return (
     <div className="w-48">
@@ -129,7 +152,7 @@ export default function ShopFilter() {
               categories.map((category) => (
                 <button
                   key={category}
-                  className={`border-b w-full text-left px-4 py-2 cursor-pointer hover:bg-[#DC2126] hover:text-white ${
+                  className={`border-b last:border-b-0 w-full text-left px-4 py-2 cursor-pointer hover:bg-[#DC2126] hover:text-white ${
                     secondFilter === category && "bg-[#DC2126] text-white"
                   }`}
                   onClick={() => {

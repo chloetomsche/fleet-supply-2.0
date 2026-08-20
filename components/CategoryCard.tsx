@@ -13,7 +13,7 @@ export default function CategoryCard({
   return (
     <div className="flex flex-col gap-3 justify-center items-center">
       <div className="relative group cursor-pointer overflow-hidden">
-        <Link href={`/shop?/category=${name}`}><img
+        <Link href={`/shop?category=${name}`}><img
           src={src}
           className="transition-all duration-300 group-hover:brightness-75 w-56 h-56 md:w-72 md:h-72 lg:w-96 lg:h-96 rounded-sm"
         /></Link>
