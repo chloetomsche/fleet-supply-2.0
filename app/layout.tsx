@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Tilt_Warp } from "next/font/google";
+import { Geist, Geist_Mono, Tilt_Warp, Fugaz_One } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
@@ -15,7 +15,13 @@ const geistMono = Geist_Mono({
 });
 
 const tiltWrap = Tilt_Warp({
-  variable:"--font--tilt-warp",
+  variable:"--font-tilt-warp",
+  subsets: ["latin"]
+})
+
+const fugazOne = Fugaz_One({
+  weight: "400",
+  variable: "--font-fugaz-one",
   subsets: ["latin"]
 })
 
@@ -32,9 +38,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${fugazOne.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col font-fugaz">
         <Navbar />
         <main className="min-h-screen">{children}</main>
 

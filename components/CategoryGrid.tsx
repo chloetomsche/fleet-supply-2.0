@@ -1,7 +1,5 @@
-"use client";
-
-import { useState, useEffect } from "react";
 import CategoryCard from "./CategoryCard";
+
 export default function CategoryGrid() {
   type CategoryItem = {
     name: string;
@@ -17,7 +15,10 @@ export default function CategoryGrid() {
   ];
 
   return (
-    <div className="flex justify-center my-25">
+    <div className="flex flex-col gap-10 justify-center items-center my-15 md:my-25 lg:my-50">
+      <h2 className="text-5xl md:text-6xl lg:text-7xl font-fugaz ">
+        SUMMER ESSENTIALS
+      </h2>
       <div className="grid grid-cols-2 gap-10 md:grid-cols-2 md:gap-15 lg:grid-cols-3 lg:gap-20">
         {summerCategories.map((category) => (
           <div key={category.name}>

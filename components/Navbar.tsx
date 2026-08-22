@@ -3,8 +3,15 @@
 import { useState } from "react";
 import Link from "next/link";
 import SearchBar from "./SearchBar";
+import { usePathname } from "next/navigation";
 
 export default function Navbar() {
+  const pathname = usePathname();
+  const isShopActive = pathname === "/shop";
+  const isServicesActive = pathname === "/services";
+  const isPromosActive = pathname === "/promotions";
+  const isLoginActive = pathname === "/login";
+
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -31,29 +38,101 @@ export default function Navbar() {
 
         {/* desktop nav links — hidden on mobile */}
         <div className="hidden md:flex gap-2 lg:gap-6 text-sm lg:text-base">
-          <Link
-            href="/shop"
-            className="text-black hover:text-[#DC2126] hover:underline"
-          >
-            Shop All
+          <Link href="/shop">
+            <div className="group flex flex-col items-center cursor-pointer">
+              <img
+                src={
+                  isShopActive
+                    ? "/shopping-bag-filled.png"
+                    : "/shopping-bag-black.png"
+                }
+                className={`w-6 h-6 ${!isShopActive && "group-hover:hidden"}`}
+              />
+              <img
+                src="/shopping-bag-red.png"
+                className={`w-6 h-6 ${
+                  !isShopActive ? "hidden group-hover:block" : "hidden"
+                }`}
+              />
+              <p
+                className={`group-hover:text-[#DC2126] ${
+                  isShopActive ? "text-[#DC2126]" : "text-black"
+                }`}
+              >
+                Shop All
+              </p>
+            </div>
           </Link>
-          <Link
-            href="/promotions"
-            className="text-black hover:text-[#DC2126] hover:underline"
-          >
-            Promotions
+          <Link href="/services">
+            <div className="group flex flex-col items-center cursor-pointer">
+              <img
+                src={
+                  isServicesActive
+                    ? "/services-filled.png"
+                    : "/services-black.png"
+                }
+                className={`w-6 h-6 ${
+                  !isServicesActive && "group-hover:hidden"
+                }`}
+              />
+              <img
+                src="/services-red.png"
+                className={`w-6 h-6 ${
+                  !isServicesActive ? "hidden group-hover:block" : "hidden"
+                }`}
+              />
+              <p
+                className={`group-hover:text-[#DC2126] ${
+                  isServicesActive ? "text-[#DC2126]" : "text-black"
+                }`}
+              >
+                Services
+              </p>
+            </div>
           </Link>
-          <Link
-            href="/cart"
-            className="text-black hover:text-[#DC2126] hover:underline"
-          >
-            Cart
+          <Link href="/promotions">
+            <div className="group flex flex-col items-center cursor-pointer">
+              <img
+                src={
+                  isPromosActive ? "/promos-filled.png" : "/promos-black.png"
+                }
+                className={`w-6 h-6 ${!isPromosActive && "group-hover:hidden"}`}
+              />
+              <img
+                src="/promos-red.png"
+                className={`w-6 h-6 ${
+                  !isPromosActive ? "hidden group-hover:block" : "hidden"
+                }`}
+              />
+              <p
+                className={`group-hover:text-[#DC2126] ${
+                  isPromosActive ? "text-[#DC2126]" : "text-black"
+                }`}
+              >
+                Promotions
+              </p>
+            </div>
           </Link>
-          <Link
-            href="/login"
-            className="text-black hover:text-[#DC2126] hover:underline"
-          >
-            Log In
+          <Link href="/login">
+            <div className="group flex flex-col items-center cursor-pointer">
+              <img
+                src={isLoginActive ? "/user-filled.png" : "/user-black.png"}
+                className={`w-6 h-6 ${!isLoginActive && "group-hover:hidden"}`}
+              />
+              <img
+                src="/user-red.png"
+                className={`w-6 h-6 ${
+                  !isLoginActive ? "hidden group-hover:block" : "hidden"
+                }`}
+              />
+              <p
+                className={`group-hover:text-[#DC2126] ${
+                  isLoginActive ? "text-[#DC2126]" : "text-black"
+                }`}
+              >
+                Log In
+              </p>
+            </div>
           </Link>
         </div>
 
@@ -70,34 +149,54 @@ export default function Navbar() {
 
       {/* mobile dropdown — links only, no search bar since it's already visible */}
       {isOpen && (
-        <div className="md:hidden flex flex-col gap-4 mt-4 pt-4 border-t border-gray-200">
+        <div className="md:hidden flex justify-around gap-4 mt-6 py-4 border-b border-t border-gray-200">
           <Link
             href="/shop"
             className="text-black hover:text-[#DC2126]"
-            onClick={() => setIsOpen(false)}
+            
           >
-            Shop All
+            <img
+              src={
+                isShopActive
+                  ? "/shopping-bag-filled.png"
+                  : "/shopping-bag-black.png"
+              }
+              className="w-6 h-6"
+            />
+          </Link>
+          <Link
+            href="/services"
+            className="text-black hover:text-[#DC2126]"
+            
+          >
+            <img
+              src={
+                isServicesActive
+                  ? "/services-filled.png"
+                  : "/services-black.png"
+              }
+              className="w-6 h-6"
+            />
           </Link>
           <Link
             href="/promotions"
             className="text-black hover:text-[#DC2126]"
-            onClick={() => setIsOpen(false)}
+       
           >
-            Promotions
-          </Link>
-          <Link
-            href="/cart"
-            className="text-black hover:text-[#DC2126]"
-            onClick={() => setIsOpen(false)}
-          >
-            Cart
+            <img
+              src={isPromosActive ? "/promos-filled.png" : "/promos-black.png"}
+              className="w-6 h-6"
+            />
           </Link>
           <Link
             href="/login"
             className="text-black hover:text-[#DC2126]"
-            onClick={() => setIsOpen(false)}
+        
           >
-            Log In
+            <img
+              src={isLoginActive ? "/user-filled.png" : "/user-black.png"}
+              className="w-6 h-6"
+            />
           </Link>
         </div>
       )}

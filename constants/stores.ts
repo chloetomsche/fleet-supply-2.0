@@ -1,5 +1,6 @@
 const stores = [
   {
+    id: 1,
     name: "Glencoe",
     services: [
       "Key cutting",
@@ -12,6 +13,7 @@ const stores = [
     ],
   },
   {
+    id: 2,
     name: "Sauk Centre",
     services: [
       "Key cutting",
@@ -24,8 +26,9 @@ const stores = [
       "Live bait",
     ],
   },
-  { name: "Paynesville", services: ["Key cutting", "DNR licensing"] },
+  { id: 3, name: "Paynesville", services: ["Key cutting", "DNR licensing"] },
   {
+    id: 4,
     name: "Faribault",
     services: [
       "Key cutting",
@@ -35,11 +38,13 @@ const stores = [
     ],
   },
   {
+    id: 5,
     name: "Long Prairie",
     services: ["Key cutting", "DNR licensing", "Chainsaw sharpening"],
   },
-  { name: "Glenwood", services: ["Key cutting"] },
+  { id: 6, name: "Glenwood", services: ["Key cutting"] },
   {
+    id: 7,
     name: "Little Falls",
     services: [
       "Key cutting",
@@ -50,5 +55,4 @@ const stores = [
     ],
   },
 ];
-
 export default stores;

@@ -21,7 +21,7 @@ export default function SalesDisplay() {
     <div className="my-15 flex flex-col gap-6 px-2 md:px-4 lg:px-6">
       <div className="bg-linear-to-br from-[#DC2126] via-[#DC2126] to-[#8B0000] px-3 md:px-4 lg:px-6 py-4 md:py-6 lg:py-8 rounded-sm">
         <h2 className="text-white text-lg md:text-xl lg:text-2xl font-bold mb-3 md:mb-4">
-          Today's Deals
+          TODAY'S DEALS
         </h2>
 
         {/* page 1 buttons */}

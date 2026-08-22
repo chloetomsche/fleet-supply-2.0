@@ -167,8 +167,13 @@ export default function ShopFilter() {
               seasons.map((season) => (
                 <button
                   key={season}
-                  className="border-b last:border-b-0 w-full text-left px-4 py-2 cursor-pointer hover:bg-gray-50"
-                  onClick={() => applyFilter("season", season)}
+                  className={`border-b last:border-b-0 w-full text-left px-4 py-2 cursor-pointer hover:bg-[#DC2126] hover:text-white ${
+                    secondFilter === season && "bg-[#DC2126] text-white"
+                  }`}
+                  onClick={() => {
+                    applyFilter("season", season);
+                    setSecondFilter(season);
+                  }}
                 >
                   {season}
                 </button>
@@ -177,8 +182,13 @@ export default function ShopFilter() {
               brands.map((brand) => (
                 <button
                   key={brand}
-                  className="border-b last:border-b-0 w-full text-left px-4 py-2 cursor-pointer hover:bg-gray-50"
-                  onClick={() => applyFilter("brand", brand)}
+                  className={`border-b last:border-b-0 w-full text-left px-4 py-2 cursor-pointer hover:bg-[#DC2126] hover:text-white ${
+                    secondFilter === brand && "bg-[#DC2126] text-white"
+                  }`}
+                  onClick={() => {
+                    applyFilter("brand", brand);
+                    setSecondFilter(brand);
+                  }}
                 >
                   {brand}
                 </button>

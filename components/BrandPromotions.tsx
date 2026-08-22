@@ -1,8 +1,8 @@
 export default function BrandPromotions() {
   return (
-    <div className="flex flex-col items-center gap-5 my-35 ">
-      <img src="/mock-banner4.svg" className="rounded-md" />
-        <h3 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-[#DC2126] tilt-warp-heading mt-8">NEW LOWER PRICE</h3>
+    <div className="flex flex-col items-center gap-6 mb-15 md:mt-15 md:mb-20 lg:mt-25 lg:mb-50 ">
+      <img src="/mock-banner4.svg" className="rounded-md w-[600px] h-[150px] md:w-[1000px] md:h-[200px] lg:w-[1400px] lg:h-[250px]" />
+        <h3 className="text-5xl md:text-6xl lg:text-7xl  font-fugaz mt-8">NEW LOWER PRICE</h3>
         <div className="flex flex-col gap-4 md:flex-row md:gap-5 lg:gap-8">
             <img src="/mock-promos1.svg" className="w-[400px] h-[250px] md:w-[475px] md:h-[250px] lg:w-[650px] lg:h-[400px]"/>
             <img src="/mock-promos2.svg"  className="w-[400px] h-[250px] md:w-[475px] md:h-[250px] lg:w-[650px] lg:h-[400px]"/>
