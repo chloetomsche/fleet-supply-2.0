@@ -14,7 +14,7 @@ export default function RewardsBlock() {
               WHEN YOU VERIFY YOUR ACCOUNT!
             </h1>
 
-            <button className="border px-2 py-2 hover:underline cursor-pointer font-fugaz">
+            <button className="border px-2 py-2 hover:underline cursor-pointer font-fugaz rounded-sm">
               JOIN NOW
             </button>
           </div>

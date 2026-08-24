@@ -15,7 +15,7 @@ export default async function ShopAll({
   }>;
 }) {
   const { query, season, brand, category, on_sale } = await searchParams;
-  console.log("searchParams:", { query, season, brand, category, on_sale });
+ 
   const onSale = on_sale === "true" ? true : undefined;
 
   const products = await fetchProductsByFilter({
@@ -26,7 +26,6 @@ export default async function ShopAll({
     on_sale: onSale,
   });
 
-  console.log("products being passed to grid:", products.length);
   return (
     <div className="flex flex-col px-10">
       <img src="/shop-banner2.svg" className="rounded-md" />

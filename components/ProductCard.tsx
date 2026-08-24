@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { useSearchParams, useRouter } from "next/navigation";
 
 type ProductCardProps = {
   product: {
@@ -15,15 +15,22 @@ type ProductCardProps = {
   };
 };
 export default function ProductCard({ product }: ProductCardProps) {
+  const searchParams = useSearchParams();
+  const params = new URLSearchParams(searchParams.toString());
+  const productUrl = `/products/${product.slug}?${params.toString()}`;
+  const router = useRouter();
+
   return (
     <div className="flex flex-col gap-3 items-center border rounded-sm px-4 py-4">
-      <Link href={`/products/${product.slug}`}>
-        <img
-          src={product.src}
-          className="cursor-pointer hover:brightness-75"
-          alt={product.description}
-        />
-      </Link>
+      <img
+        src={product.src}
+        className="cursor-pointer hover:brightness-75"
+        alt={product.description}
+        onClick={() => {
+          router.push(productUrl)
+        }}
+      />
+
       <p className="font-bold">{product.name}</p>
       <p className="font-medium">${product.price}</p>
       <div className="flex gap-2">
