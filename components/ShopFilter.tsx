@@ -12,7 +12,7 @@ export default function ShopFilter() {
   const searchParams = useSearchParams();
 
   function applyFilter(key: string, value: string) {
-    const params = new URLSearchParams(searchParams.toString());
+    const params = new URLSearchParams();
 
     params.set(key, value);
 

@@ -9,7 +9,7 @@ async function seedProducts() {
   const seededProducts = await Promise.all(
     products.map(
       (product) => sql`
-            INSERT INTO products (name, season, brand, category, subcategory, price, sale_price, quantity, description, slug, rating, src, on_saSle, in_stock, shipping_available, in_store_pickup, review_count, tags)
+            INSERT INTO products (name, season, brand, category, subcategory, price, sale_price, quantity, description, slug, rating, src, on_sale, in_stock, shipping_available, in_store_pickup, review_count, tags)
             VALUES (${product.name}, ${product.season}, ${
         product.brand
       }, ${product.category}, ${product.subcategory}, ${product.price}, ${
