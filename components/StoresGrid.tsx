@@ -15,12 +15,12 @@ export default function StoresGrid() {
   };
   return (
     <div className="flex justify-center">
-      <div className="grid grid-cols-3 justify-center gap-20 ">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 lg:gap-20">
         {stores.map((store) => (
           <div
             key={store.id}
             onClick={() => handleClick(store.id)}
-            className="cursor-pointer "
+            className="cursor-pointer w-64 h-80 md:w-72 md:h-96 lg:w-80 lg:h-96 "
             style={{
               transformStyle: "preserve-3d",
               transform:
@@ -29,8 +29,7 @@ export default function StoresGrid() {
                   : "rotateY(0deg)",
               transition: "transform 0.7s ease",
               position: "relative",
-              width: "320px",
-              height: "384px",
+      
             }}
           >
             <div
@@ -53,13 +52,17 @@ export default function StoresGrid() {
               <h1 className="font-fugaz text-2xl text-white text-center w-full py-6 border-b border-white/30">
                 {store.name.toUpperCase()}
               </h1>
-              <ul className="flex flex-col gap-3 list-disc list-inside mt-2 w-full">
-                {store.services.map((service, i) => (
-                  <li key={i} className="text-white text-sm text-left">
-                    {service}
-                  </li>
-                ))}
-              </ul>
+              
+                <ul className="grid grid-cols-2 items-center gap-4 list-disc list-outside pl-4 mt-2 w-full">
+                  {store.services.map((service, i) => (
+                    <li key={i} className="text-white text-sm text-left">
+                      {service}
+                    </li>
+                  ))}
+                </ul>
+                
+                <button className="text-white border-2 px-2 py-2 font-medium rounded-md mt-auto mb-4 cursor-pointer hover:underline hover:font-bold">VIEW MORE</button>
+          
             </div>
           </div>
         ))}

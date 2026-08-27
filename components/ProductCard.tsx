@@ -4,7 +4,7 @@ import { useSearchParams, useRouter } from "next/navigation";
 
 type ProductCardProps = {
   product: {
-    id: number;
+    product_id: number;
     name: string;
     src: string;
     price: number;

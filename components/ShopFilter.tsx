@@ -3,31 +3,47 @@ import { useState, useEffect } from "react";
 import { useRouter, usePathname, useSearchParams } from "next/navigation";
 
 export default function ShopFilter() {
+  //First filtering state (i.e., Category, Season, Brand, and Sale)
   const [filter, setFilter] = useState("");
+
+  //Second filtering state (e.g., Power Tools, Carhartt, and Winter)
   const [secondFilter, setSecondFilter] = useState("");
+  
+  //Manages second filter button UI active state
   const [isSecondFilter, setIsSecondFilter] = useState(false);
 
+  //Controls navigation
   const router = useRouter();
+
+  //Reads the current URL path
   const pathname = usePathname();
+
+  //Reads the current search parameters in the URL
   const searchParams = useSearchParams();
 
+  // Filters products through shop page's side bar
   function applyFilter(key: string, value: string) {
     const params = new URLSearchParams();
 
+    //Creates key value pairs for url params. (e.g.,category: Power Tools)
     params.set(key, value);
 
+    //Pushes new route with the 
     router.push(`${pathname}?${params.toString()}`);
   }
 
+  //Clears any previous search parameters so it shows all the unfiltered products
   function clearFilters() {
     router.push(pathname);
   }
 
   useEffect(() => {
+    //Checking to see if in the current URL, there was preexisting parameters from each filter button
     const existingCategoryParam = searchParams.get("category");
     const existingSeasonParam = searchParams.get("season");
     const existingBrandParam = searchParams.get("brand");
 
+    //When a user navigates NOT from the shop page, we use the search params in the URL to update the shop filter UI (i.e., making the filter buttons be in their active state)
     if (existingCategoryParam) {
       setFilter("category");
       setIsSecondFilter(true);
@@ -72,6 +88,7 @@ export default function ShopFilter() {
     "Hampton Bay",
     "Frigidaire",
   ];
+  
 
   return (
     <div className="w-48">
